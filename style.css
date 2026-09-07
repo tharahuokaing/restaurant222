@@ -745,38 +745,38 @@ body::before {
 }
 
 /* =========================================================
-   13. 1-COLUMN 1-ROW SINGLE ICON MENU (SINGLE STACK)
+   13. MODERN SINGLE-COLUMN MENU LAYOUT (DESKTOP, MOBILE & POS)
    ========================================================= */
 #main-content {
   position: relative;
   z-index: 1;
-  padding: 15px;
+  padding: 16px;
   width: 100%;
   box-sizing: border-box;
 }
 
 #menu {
   display: grid !important;
-  /* Forces strictly 1 single column (1 icon per row) across all screens */
-  grid-template-columns: 1fr !important;
-  gap: 14px;
+  grid-template-columns: 1fr !important; /* Single column stack across all screen sizes */
+  gap: 12px;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Horizontal Full-Width Single Card Layout */
+/* Horizontal Glassmorphism Item Card */
 .product-card {
   position: relative;
-  background: rgba(0, 20, 40, 0.7);
-  border: 1px solid rgba(0, 255, 255, 0.3);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1), inset 0 0 10px rgba(0, 255, 255, 0.05);
+  background: rgba(0, 20, 40, 0.75);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  border-radius: var(--radius-md, 12px);
+  padding: 12px 18px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 255, 255, 0.05);
   display: flex !important;
-  flex-direction: row !important; /* Lays out icon, text, and price horizontally in 1 line */
-  justify-content: space-between;
+  flex-direction: row !important;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
@@ -786,30 +786,44 @@ body::before {
 
 .product-card:hover {
   border-color: #00ffff;
-  background: rgba(0, 35, 65, 0.85);
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.5), inset 0 0 15px rgba(0, 255, 255, 0.2);
-  transform: translateY(-2px) scale(1.01);
+  background: rgba(0, 35, 65, 0.9);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4), inset 0 0 15px rgba(0, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
-/* Icon / Image Sizing for Single Row */
-.product-card img {
-  width: 64px;
-  height: 64px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  margin-bottom: 0; /* Clear bottom margin for row layout */
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  flex-shrink: 0;
+/* =========================================================
+   UNIVERSAL IMAGE & ICON SIZING FOR ID 1 THROUGH ID 150
+   ========================================================= */
+/* Targets all image elements inside menu cards including dynamic ID ranges 1-150 */
+.product-card img,
+.product-card [data-id],
+.product-card img[src*="logo"],
+.product-card img[src*="product"],
+.product-card img[src*="icon"],
+.product-card img[id^="product-img-"],
+.product-card img[id^="icon-"] {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  border: 1px solid rgba(0, 255, 255, 0.3) !important;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 255, 255, 0.2) !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
 }
 
+/* Text Container Styling */
 .product-title {
   color: #ffffff;
   font-family: var(--font-khmer);
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 700;
-  margin-bottom: 0;
+  margin: 0;
   text-align: left;
   flex: 1;
   white-space: nowrap;
@@ -819,16 +833,16 @@ body::before {
 }
 
 .product-price {
-  color: var(--text-accent);
-  font-weight: bold;
-  font-size: 1.1em;
+  color: var(--text-accent, #00ff88);
+  font-weight: 700;
+  font-size: 1.1rem;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 /* =========================================================
-   14. MOBILE & POS OPTIMIZATION (<= 600px)
+   14. COMPACT MOBILE & ANDROID POS TERMINAL OPTIMIZATION (<= 600px)
    ========================================================= */
 @media (max-width: 600px) {
   #main-content {
@@ -840,21 +854,31 @@ body::before {
   }
 
   .product-card {
-    padding: 8px 12px;
-    gap: 10px;
-    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    gap: 12px;
   }
 
-  .product-card img {
-    width: 48px;
-    height: 48px;
+  /* Compact 48px Uniform Icon Sizing for Mobile Screens */
+  .product-card img,
+  .product-card [data-id],
+  .product-card img[src*="logo"],
+  .product-card img[src*="product"],
+  .product-card img[src*="icon"],
+  .product-card img[id^="product-img-"],
+  .product-card img[id^="icon-"] {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
   }
 
   .product-title {
-    font-size: 0.85em;
+    font-size: 0.88rem;
   }
 
   .product-price {
-    font-size: 0.9em;
+    font-size: 0.95rem;
   }
-                    }
+}
